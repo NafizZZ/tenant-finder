@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tenant_finder/constants.dart';
-import 'package:tenant_finder/navigation_drawer_widget.dart';
+import 'package:tenant_finder/screens/navigation_drawer_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   var email, password;
@@ -15,7 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home Page"),
+        title: Text("Home Screen"),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
