@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       onGenerateRoute: RouteGenerator.generateRoute,
       initialRoute: '/',
-      // home: LoginScreen(),
+      home: LoginScreen(),
     );
   }
 }

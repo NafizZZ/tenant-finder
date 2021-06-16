@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tenant_finder/login_screen.dart';
+import 'package:tenant_finder/screens/login_screen.dart';
 import 'package:tenant_finder/screens/home_screen.dart';
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {

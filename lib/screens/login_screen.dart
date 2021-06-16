@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tenant_finder/constants.dart';
 
 
 class LoginScreen extends StatefulWidget {
@@ -16,7 +17,7 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     super.initState();
     emailController.text = 'n@augnitive.com';
-    passwordController.text = '1234';
+    passwordController.text = '12345678';
   }
 
   @override
@@ -135,12 +136,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             );
                           },
                         );
-
-                        // If the form is valid, display a snackbar. In the real world,
-                        // you'd often call a server or save the information in a database.
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('Processing Data')));
+                        Navigator.pushNamed(context, homeRoute, arguments: {'emailId': emailController.text, 'password': passwordController.text});
                       }
+
                     },
                     child: Text(
                       'Login',
