@@ -38,6 +38,13 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       drawer: NavigationDrawerWidget(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, rentPost);          
+        },
+        child: const Icon(Icons.add_business),
+        backgroundColor: Colors.blue,
+      ),
     );
   }
 }
