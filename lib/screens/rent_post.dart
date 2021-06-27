@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:tenant_finder/constants.dart';
 
 import 'package:tenant_finder/models/post.dart';
@@ -12,6 +15,9 @@ class RentPost extends StatefulWidget {
 }
 
 class _RentPostState extends State<RentPost> {
+
+  File _image;
+
   Post _post = Post();
   final _formKey = GlobalKey<FormState>();
   DatabaseHelper _dbHelper;
@@ -42,6 +48,61 @@ class _RentPostState extends State<RentPost> {
       _dbHelper = DatabaseHelper.instance;
     });
   }
+
+
+// for picking image from camera
+  _imgFromCamera() async {
+  File image = await ImagePicker.pickImage(
+    source: ImageSource.camera, imageQuality: 50
+  );
+
+  setState(() {
+    _image = image;
+  });
+}
+
+// for picking image from gallery
+_imgFromGallery() async {
+  File image = await  ImagePicker.pickImage(
+      source: ImageSource.gallery, imageQuality: 50
+  );
+
+  setState(() {
+    _image = image;
+  });
+}
+
+
+void _showPicker(context) {
+  showModalBottomSheet(
+      context: context,
+      builder: (BuildContext bc) {
+        return SafeArea(
+          child: Container(
+            child: new Wrap(
+              children: <Widget>[
+                new ListTile(
+                    leading: new Icon(Icons.photo_library),
+                    title: new Text('Photo Library'),
+                    onTap: () {
+                      _imgFromGallery();
+                      Navigator.of(context).pop();
+                    }),
+                new ListTile(
+                  leading: new Icon(Icons.photo_camera),
+                  title: new Text('Camera'),
+                  onTap: () {
+                    _imgFromCamera();
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
+          ),
+        );
+      }
+    );
+}
 
   @override
   Widget build(BuildContext context) {
@@ -200,6 +261,41 @@ class _RentPostState extends State<RentPost> {
                     // onSaved: (val) => setState(() => _post.description = val),
                   ),
                 ),
+
+                Center(
+                  child: GestureDetector(
+                    onTap: () {
+                      _showPicker(context);
+                    },
+                    child: ClipRRect(
+                      // radius: 55,
+                      // backgroundColor: Colors.blue,
+
+                      child: _image != null
+                          ? ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Image.file(
+                                _image,
+                                width: 150,
+                                height: 130,
+                                fit: BoxFit.fitHeight,
+                              ),
+                            )
+                          : Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.grey[200],
+                                  borderRadius: BorderRadius.circular(20)),
+                              width: 150,
+                              height: 130,
+                              child: Icon(
+                                Icons.camera_alt,
+                                color: Colors.grey[800],
+                              ),
+                            ),
+                    ),
+                  ),
+                ),
+
                 Container(
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(

@@ -47,7 +47,6 @@ class _MyPostState extends State<MyPost> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
              _list(),
-       
             ],
           ),
       ),
