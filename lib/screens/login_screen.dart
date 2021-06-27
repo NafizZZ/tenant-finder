@@ -123,7 +123,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: FlatButton(
                     onPressed: () {
                       // Validate returns true if the form is valid, or false otherwise.
-                      if (_formKey.currentState!.validate()) {
+                      // if we use flutter version 2.12.0 or later version then we have to use _formKey.currentState! for null safty
+                      if (_formKey.currentState.validate()) {
                         showDialog(
                           context: context,
                           builder: (context) {
