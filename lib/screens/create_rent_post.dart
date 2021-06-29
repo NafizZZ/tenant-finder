@@ -5,16 +5,17 @@ import 'package:image_picker/image_picker.dart';
 import 'package:tenant_finder/constants.dart';
 
 import 'package:tenant_finder/models/post.dart';
+import 'package:tenant_finder/screens/rent_post_list.dart';
 import 'package:tenant_finder/utils/database_helper.dart';
 
-class RentPost extends StatefulWidget {
-  // const RentPost({ Key? key }) : super(key: key);
+class CreateRentPost extends StatefulWidget {
+  // const CreateRentPost({ Key? key }) : super(key: key);
 
   @override
-  _RentPostState createState() => _RentPostState();
+  _CreateRentPostState createState() => _CreateRentPostState();
 }
 
-class _RentPostState extends State<RentPost> {
+class _CreateRentPostState extends State<CreateRentPost> {
 
   File _image;
 
@@ -291,7 +292,7 @@ void _showPicker(context) {
                                 Icons.camera_alt,
                                 color: Colors.grey[800],
                               ),
-                            ),
+                            ), 
                     ),
                   ),
                 ),
@@ -342,6 +343,6 @@ void _showPicker(context) {
       print(response);
 
       // form.reset();
-      // Navigator.pushNamed(context, myPost);
+      Navigator.pushNamed(context, rentPostList);
   }
 }
