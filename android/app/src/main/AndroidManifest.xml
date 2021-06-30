@@ -2,7 +2,9 @@
     package="com.example.tenant_finder">
    <application
         android:label="tenant_finder"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:requestLegacyExternalStorage="true"
+        >
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
