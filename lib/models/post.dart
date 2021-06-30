@@ -1,14 +1,5 @@
+import 'package:tenant_finder/constants.dart';
 class Post{
-  static const tblPost = 'post';
-  static const colId = 'id';
-  static const colAddress = 'address';
-  static const colSizeOfPlace = 'sizeOfPlace'; 
-  static const colRentCommencementDate = 'rentCommencementDate';
-  static const colRentalPrice = 'rentalPrice';
-  static const colBookingMoney = 'bookingMoney';
-  static const colDescription = 'description';
-
-
 
   int id;
   String address;

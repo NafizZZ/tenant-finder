@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tenant_finder/screens/login_screen.dart';
-import 'package:tenant_finder/screens/home_screen.dart';
+import 'package:tenant_finder/screens/login.dart';
+import 'package:tenant_finder/screens/home.dart';
 import 'package:tenant_finder/screens/rent_post_list.dart';
 import 'package:tenant_finder/screens/create_rent_post.dart';
 

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tenant_finder/constants.dart';
+import 'package:tenant_finder/models/post.dart';
 import 'package:tenant_finder/screens/widgets/navigation_drawer_widget.dart';
+import 'package:tenant_finder/utils/database_helper.dart';
 
 class RentPostList extends StatefulWidget {
   // RentPostList({Key? key}) : super(key: key);
@@ -10,17 +12,43 @@ class RentPostList extends StatefulWidget {
 }
 
 class _RentPostListState extends State<RentPostList> {
+
+  var _posts = [];
+  DatabaseHelper _dbHelper;
+  @override
+  void initState(){
+    super.initState();
+    setState((){
+      _dbHelper = DatabaseHelper.instance;
+    });
+    fetchposts();
+  }
+  fetchposts() async {  
+    // setState(() async {
+      _posts = await _dbHelper.fetchPosts();
+      for(var post in _posts){
+          print("postss : $post");
+      }
+      
+    // });
+  }
+
+  
+
+  
+
   final List<String> entries = <String>['Gulshan', 'Banani', 'Dhanmondi'];
   // final List<int> colorCodes = <int>[600, 300, 100];
   final List<int> price = <int>[600, 300, 100];
-  List a = [
-    "https://q4g9y5a8.rocketcdn.me/wp-content/uploads/2020/02/home-banner-2020-02-min.jpg",
-    "https://pbs.twimg.com/media/Dk3BtZRW0AAov5V.jpg",
-    "https://i.pinimg.com/originals/9e/97/80/9e978052c3da56cec171517e65028965.jpg",
-  ];
+  // List a = [
+  //   "https://q4g9y5a8.rocketcdn.me/wp-content/uploads/2020/02/home-banner-2020-02-min.jpg",
+  //   "https://pbs.twimg.com/media/Dk3BtZRW0AAov5V.jpg",
+  //   "https://i.pinimg.com/originals/9e/97/80/9e978052c3da56cec171517e65028965.jpg",
+  // ];
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black), // changing the drawer icon color
@@ -31,7 +59,7 @@ class _RentPostListState extends State<RentPostList> {
         color: Colors.blueGrey[100],
         child: ListView.builder(
           padding: const EdgeInsets.all(8),
-          itemCount: entries.length,
+          itemCount: _posts.length,
           itemBuilder: (BuildContext context, int index) {
             return Container(
               margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
@@ -45,33 +73,34 @@ class _RentPostListState extends State<RentPostList> {
                 // color: Colors.black,
                 child: Column(
                   children: <Widget>[
-                    Image.network(a[index], height: 250, width: double.infinity, fit: BoxFit.fill),
+                    // Image.network(a[index], height: 250, width: double.infinity, fit: BoxFit.fill),
 
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //   children: <Widget>[
                   
-                        Container(
-                          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                          child: Text('${entries[index]}', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                    //     Container(
+                    //       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    //       child: Text('${entries[index]}', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
                         
-                        ),
-                        // const SizedBox(width: 8),
-                        Container(
-                          padding: EdgeInsets.symmetric(horizontal: 20),
-                          child: Text('\$ ${price[index]}', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.indigoAccent),),
+                    //     ),
+                    //     // const SizedBox(width: 8),
+                    //     Container(
+                    //       padding: EdgeInsets.symmetric(horizontal: 20),
+                    //       child: Text('\$ ${price[index]}', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.indigoAccent),),
                         
-                        ),
-                        // const SizedBox(width: 8),
-                      ],
-                    ),
+                    //     ),
+                    //     // const SizedBox(width: 8),
+                    //   ],
+                    // ),
 
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Container(
                           padding: EdgeInsets.symmetric(horizontal: 20),
-                          child: const Text('ABCD'),
+                      
+                          child: Text('Booking money: ' + _posts[index].bookingMoney),
                           
                         ),
                         // const SizedBox(width: 8),
