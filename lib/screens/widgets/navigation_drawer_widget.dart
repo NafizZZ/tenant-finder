@@ -60,8 +60,7 @@ class NavigationDrawerWidget extends StatelessWidget {
             leading: Icon(Icons.post_add_outlined),
             title: Text('My Post'),
             onTap: () {
-              // Update the state of the app.
-              // ...
+              Navigator.pushNamed(context, rentPostList);
             },
           ),
           ListTile(

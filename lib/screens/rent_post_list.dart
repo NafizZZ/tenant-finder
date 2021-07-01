@@ -24,27 +24,28 @@ class _RentPostListState extends State<RentPostList> {
     fetchposts();
   }
   fetchposts() async {  
-    // setState(() async {
-      _posts = await _dbHelper.fetchPosts();
-      for(var post in _posts){
-          print("postss : $post");
-      }
-      
-    // });
+      var x = await _dbHelper.fetchPosts();
+     
+      // for(var post in _posts){
+          //  print("postss : $_posts");
+          //  var arr = [{'key' : 1}];
+          //  print(arr[0]['key']);
+          //  print(_posts[0]['bookingMoney']);
+      // }
+    setState(() {  
+         _posts = x;
+     });
   }
-
   
 
-  
-
-  final List<String> entries = <String>['Gulshan', 'Banani', 'Dhanmondi'];
+  // final List<String> entries = <String>['Gulshan', 'Banani', 'Dhanmondi'];
   // final List<int> colorCodes = <int>[600, 300, 100];
-  final List<int> price = <int>[600, 300, 100];
-  // List a = [
-  //   "https://q4g9y5a8.rocketcdn.me/wp-content/uploads/2020/02/home-banner-2020-02-min.jpg",
-  //   "https://pbs.twimg.com/media/Dk3BtZRW0AAov5V.jpg",
-  //   "https://i.pinimg.com/originals/9e/97/80/9e978052c3da56cec171517e65028965.jpg",
-  // ];
+  // final List<int> price = <int>[600, 300, 100];
+  List a = [
+    "https://q4g9y5a8.rocketcdn.me/wp-content/uploads/2020/02/home-banner-2020-02-min.jpg",
+    "https://pbs.twimg.com/media/Dk3BtZRW0AAov5V.jpg",
+    "https://i.pinimg.com/originals/9e/97/80/9e978052c3da56cec171517e65028965.jpg",
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -73,26 +74,26 @@ class _RentPostListState extends State<RentPostList> {
                 // color: Colors.black,
                 child: Column(
                   children: <Widget>[
-                    // Image.network(a[index], height: 250, width: double.infinity, fit: BoxFit.fill),
+                    Image.network(a[0], height: 250, width: double.infinity, fit: BoxFit.fill),
 
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //   children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
                   
-                    //     Container(
-                    //       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    //       child: Text('${entries[index]}', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                          child: Text('${ _posts[index][colAddress]}', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
                         
-                    //     ),
-                    //     // const SizedBox(width: 8),
-                    //     Container(
-                    //       padding: EdgeInsets.symmetric(horizontal: 20),
-                    //       child: Text('\$ ${price[index]}', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.indigoAccent),),
+                        ),
+                        // const SizedBox(width: 8),
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          child: Text('\$ ${ _posts[index]["rental_price"]}', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.indigoAccent),),
                         
-                    //     ),
-                    //     // const SizedBox(width: 8),
-                    //   ],
-                    // ),
+                        ),
+                        // const SizedBox(width: 8),
+                      ],
+                    ),
 
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -100,7 +101,7 @@ class _RentPostListState extends State<RentPostList> {
                         Container(
                           padding: EdgeInsets.symmetric(horizontal: 20),
                       
-                          child: Text('Booking money: ' + _posts[index].bookingMoney),
+                          child: Text('Booking money:  ${ _posts[index][colBookingMoney]}'),
                           
                         ),
                         // const SizedBox(width: 8),
@@ -120,6 +121,13 @@ class _RentPostListState extends State<RentPostList> {
         ),
       ),
       drawer: NavigationDrawerWidget(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, createRentPost);          
+        },
+        child: const Icon(Icons.add_business),
+        backgroundColor: Colors.blue,
+      ),
     );
   }
 }

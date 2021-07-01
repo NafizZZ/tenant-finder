@@ -62,7 +62,7 @@ class DatabaseHelper {
     return response;
   }
 
-  Future<List<Post>> fetchPosts() async{
+  fetchPosts() async{
     Database db = await database;
     
     try{

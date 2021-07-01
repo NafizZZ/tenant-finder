@@ -330,13 +330,13 @@ void _showPicker(context) {
     // print("store data fucntion ");
   }
   _onSubmit() async {
-    var form = _formKey.currentState;
+    // var form = _formKey.currentState;
       // form.save();
       _post.address = addressController.text;
-      _post.sizeOfPlace = sizeController.text;
-      _post.rentCommencementDate = rentDateController.text;
-      _post.rentalPrice = rentPriceController.text;
-      _post.bookingMoney = bookingMoneyController.text;
+      _post.size_of_place = sizeController.text;
+      _post.rent_commencement_date = rentDateController.text;
+      _post.rental_price = rentPriceController.text;
+      _post.booking_money = bookingMoneyController.text;
       _post.description = descriptionController.text;
 
       var response = await _dbHelper.insertPost(_post);
