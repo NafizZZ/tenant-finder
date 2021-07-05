@@ -125,18 +125,18 @@ class _LoginScreenState extends State<LoginScreen> {
                       // Validate returns true if the form is valid, or false otherwise.
                       // if we use flutter version 2.12.0 or later version then we have to use _formKey.currentState! for null safty
                       if (_formKey.currentState.validate()) {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              // Retrieve the text the user has entered by using the
-                              // TextEditingController.
-                              content: Text(emailController.text +
-                                  "\n" +
-                                  passwordController.text),
-                            );
-                          },
-                        );
+                        // showDialog(
+                        //   context: context,
+                        //   builder: (context) {
+                        //     return AlertDialog(
+                        //       // Retrieve the text the user has entered by using the
+                        //       // TextEditingController.
+                        //       content: Text(emailController.text +
+                        //           "\n" +
+                        //           passwordController.text),
+                        //     );
+                        //   },
+                        // );
                         Navigator.pushNamed(context, rentPostList);
                         // Navigator.pushNamed(context, homeRoute, arguments: {'emailId': emailController.text, 'password': passwordController.text});
                       }

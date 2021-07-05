@@ -38,6 +38,7 @@ class DatabaseHelper {
     final sql = '''
     CREATE TABLE $tblPost(
       $colId INTEGER PRIMARY KEY AUTOINCREMENT,
+      $colIsActive BOOLEAN,
       $colPostedBy TEXT NOT NULL, 
       $colAddress TEXT NOT NULL,
       $colSizeOfPlace TEXT NOT NULL,

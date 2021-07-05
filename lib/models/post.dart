@@ -2,7 +2,7 @@ import 'package:tenant_finder/constants.dart';
 class Post{
 
   int id;
-  // String status;
+  bool  isActive;
   String posted_by;
   String address;
   String size_of_place;
@@ -16,11 +16,11 @@ class Post{
   String description;
 
       // this.status, this.rental_type, 
-  Post({this.id, this.posted_by, this.address, this.size_of_place, this.bedroom_no, this.rent_commencement_date, this.rental_price, this.booking_money, this.rental_type_family, this.rental_type_bachelor, this.description});
+  Post({this.id, this.isActive, this.posted_by, this.address, this.size_of_place, this.bedroom_no, this.rent_commencement_date, this.rental_price, this.booking_money, this.rental_type_family, this.rental_type_bachelor, this.description});
 
   Map<String, dynamic> toMap(){
     var map = <String, dynamic> {
-      // colStatus: status,
+      colIsActive:  isActive,
       colPostedBy: posted_by,
       colAddress: address,
       colSizeOfPlace: size_of_place,
@@ -39,7 +39,7 @@ class Post{
 
   Post.fromMap(Map<String, dynamic> map){
     id = map[colId];
-    // status = map[colStatus];
+    isActive = map[colIsActive];
     posted_by = map[colPostedBy];
     address = map[colAddress];
     size_of_place = map[colSizeOfPlace];

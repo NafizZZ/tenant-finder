@@ -2,11 +2,12 @@ const String loginRoute = '/';
 const String homeRoute = '/home';
 const String createRentPost = '/createRentPost';
 const String rentPostList = '/rentPostList';
+const String detailsRentPost = '/detailsRentPost';
 
 
 const tblPost = 'post';
 const colId = 'id';
-const colStatus = 'status';
+const colIsActive = 'isActive';
 const colPostedBy = 'posted_by';
 const colAddress = 'address';
 const colSizeOfPlace = 'size_of_place'; 

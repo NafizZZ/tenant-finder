@@ -409,17 +409,18 @@ void _showPicker(context) {
 
   storeData() {
     if (_formKey.currentState.validate()) {
-      showDialog(
-        context: context,
-        builder: (context) {
-          _onSubmit();
-          return AlertDialog(
-            // Retrieve the text the user has entered by using the
-            // TextEditingController.
-            content: Text(postedByController.text + "\n" + addressController.text+ "\n" +  sizeController.text + "\n" +  bedroomNoController.text + "\n" + rentDateController.text + "\n" + rentPriceController.text + "\n" + bookingMoneyController.text + "\n" + descriptionController.text),
-          );
-        },
-      );
+      // showDialog(
+      //   context: context,
+      //   builder: (context) {
+          
+      //     return AlertDialog(
+      //       // Retrieve the text the user has entered by using the
+      //       // TextEditingController.
+      //       content: Text(postedByController.text + "\n" + addressController.text+ "\n" +  sizeController.text + "\n" +  bedroomNoController.text + "\n" + rentDateController.text + "\n" + rentPriceController.text + "\n" + bookingMoneyController.text + "\n" + descriptionController.text),
+      //     );
+      //   },
+      // );
+      _onSubmit();
     }
     // print("store data fucntion ");
   }
@@ -428,6 +429,7 @@ void _showPicker(context) {
       // form.save();
      
       _post.posted_by = postedByController.text;
+      _post.isActive = true;
       _post.address = addressController.text;
       _post.size_of_place = sizeController.text;
       _post.bedroom_no = bedroomNoController.text;

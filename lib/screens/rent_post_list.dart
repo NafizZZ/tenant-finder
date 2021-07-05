@@ -90,25 +90,23 @@ class _RentPostListState extends State<RentPostList> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              _posts[index][colAddress] == null
-                              ? Text('')
-                              : Container(
+                             Container(
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 20, vertical: 10),
-                                child: Text(
-                                  '${_posts[index][colAddress]}',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20),
+                                child:  _posts[index][colAddress] == null
+                                      ? Text('')
+                                      : Text('${_posts[index][colAddress]}',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20),
+                                  ),
                                 ),
-                              ),
                               // const SizedBox(width: 8),
-                              _posts[index]["rental_price"] == null
-                              ? Text('')
-                              : Container(
+                              Container(
                                 padding: EdgeInsets.symmetric(horizontal: 20),
-                                child: Text(
-                                  '\$ ${_posts[index]["rental_price"]}',
+                                child:  _posts[index]["rental_price"] == null
+                                      ? Text('')
+                                      :Text('\$ ${_posts[index]["rental_price"]}',
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20,
@@ -121,12 +119,11 @@ class _RentPostListState extends State<RentPostList> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              _posts[index][colBookingMoney] == null
-                              ? Text('')
-                              : Container(
+                              Container(
                                 padding: EdgeInsets.symmetric(horizontal: 20),
-                                child: Text(
-                                    'Booking money:  ${_posts[index][colBookingMoney]}'),
+                                child:  _posts[index][colBookingMoney] == null
+                                    ? Text('')
+                                    :Text('Booking money:  ${_posts[index][colBookingMoney]}'),
                               ),
                               // const SizedBox(width: 8),
                               TextButton.icon(
@@ -134,7 +131,9 @@ class _RentPostListState extends State<RentPostList> {
                                     style: TextStyle(fontSize: 15)),
                                 icon:
                                     Icon(Icons.arrow_drop_down_circle_outlined),
-                                onPressed: () {/* ... */},
+                                onPressed: () {
+                                  Navigator.pushNamed(context, detailsRentPost);
+                                },
                               ),
                               // const SizedBox(width: 8),
                             ],
@@ -146,9 +145,9 @@ class _RentPostListState extends State<RentPostList> {
                 },
               ),
             ),
-      drawer: NavigationDrawerWidget(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
+        drawer: NavigationDrawerWidget(),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
           Navigator.pushNamed(context, createRentPost);
         },
         child: const Icon(Icons.add_business),
