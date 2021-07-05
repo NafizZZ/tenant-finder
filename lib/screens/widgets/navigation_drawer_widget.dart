@@ -53,7 +53,7 @@ class NavigationDrawerWidget extends StatelessWidget {
             leading: Icon(Icons.home),
             title: Text('Home'),
             onTap: () {
-             
+             Navigator.pushNamed(context, rentPostList);
             },
           ),
           ListTile(

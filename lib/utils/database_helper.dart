@@ -32,18 +32,22 @@ class DatabaseHelper {
     await createPostsTable(db);
   }
 
-
+// $colStatus TEXT NOT NULL, $colBedroomNo TEXT NOT NULL, $colRentalType TEXT NOT NULL,
   Future<void> createPostsTable (Database db) async{
     print('this is from createPostTable function!!!');
     final sql = '''
-    CREATE TABLE ${tblPost}(
+    CREATE TABLE $tblPost(
       $colId INTEGER PRIMARY KEY AUTOINCREMENT,
+      $colPostedBy TEXT NOT NULL, 
       $colAddress TEXT NOT NULL,
       $colSizeOfPlace TEXT NOT NULL,
+      $colBedroomNo TEXT NOT NULL, 
       $colRentCommencementDate TEXT NOT NULL,
       $colRentalPrice TEXT NOT NULL,
-      $colBookingMoney INTEGER NOT NULL,
-      $colDescription TEXT NOT NULL
+      $colBookingMoney TEXT NOT NULL,
+      $colRentalTypeFamily BOOLEAN,
+      $colRentalTypeBachelor BOOLEAN,
+      $colDescription TEXT
     )''';
     await db.execute(sql);
     print("$tblPost table created!!!!!");
