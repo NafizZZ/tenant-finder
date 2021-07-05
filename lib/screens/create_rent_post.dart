@@ -5,16 +5,20 @@ import 'package:image_picker/image_picker.dart';
 import 'package:tenant_finder/constants.dart';
 
 import 'package:tenant_finder/models/post.dart';
+import 'package:tenant_finder/screens/rent_post_list.dart';
 import 'package:tenant_finder/utils/database_helper.dart';
 
-class RentPost extends StatefulWidget {
-  // const RentPost({ Key? key }) : super(key: key);
+class CreateRentPost extends StatefulWidget {
+  // const CreateRentPost({ Key? key }) : super(key: key);
 
   @override
-  _RentPostState createState() => _RentPostState();
+  _CreateRentPostState createState() => _CreateRentPostState();
 }
 
-class _RentPostState extends State<RentPost> {
+class _CreateRentPostState extends State<CreateRentPost> {
+
+  bool family = false;  
+  bool bachelor = false;  
 
   File _image;
 
@@ -22,8 +26,10 @@ class _RentPostState extends State<RentPost> {
   final _formKey = GlobalKey<FormState>();
   DatabaseHelper _dbHelper;
 
+  var postedByController = TextEditingController();
   var addressController = TextEditingController();
   var sizeController = TextEditingController();
+  var bedroomNoController = TextEditingController();
   var rentDateController = TextEditingController();
   var rentPriceController = TextEditingController();
   var bookingMoneyController = TextEditingController();
@@ -32,8 +38,11 @@ class _RentPostState extends State<RentPost> {
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
+   
+    postedByController.dispose();
     addressController.dispose();
     sizeController.dispose();
+    bedroomNoController.dispose();
     rentDateController.dispose();
     rentPriceController.dispose();
     bookingMoneyController.dispose();
@@ -118,10 +127,36 @@ void _showPicker(context) {
             child: Form(
               key: _formKey,
               child: Column(children: <Widget>[
+                
                 Container(
                   margin:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  color: Colors.blue[600],
+                  // color: Colors.blue[600],
+                  width: double.infinity,
+                  height: 60,
+                  child: TextFormField(
+                    controller: postedByController,
+                    decoration: InputDecoration(
+                        fillColor: Colors.white,
+                        filled: true,
+                        border: OutlineInputBorder(),
+                        labelText: 'Posted By: ',
+                        hintText: 'user name'),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your name ';
+                      } else {
+                        return null;
+                      }
+                    },
+                    // onSaved: (val) => setState(() => _post.address = val),
+                  ),
+                ),
+
+                Container(
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  // color: Colors.blue[600],
                   width: double.infinity,
                   height: 60,
                   child: TextFormField(
@@ -142,34 +177,67 @@ void _showPicker(context) {
                     // onSaved: (val) => setState(() => _post.address = val),
                   ),
                 ),
-                Container(
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  color: Colors.blue[600],
-                  width: double.infinity,
-                  height: 60,
-                  child: TextFormField(
-                    controller: sizeController,
-                    decoration: InputDecoration(
-                        fillColor: Colors.white,
-                        filled: true,
-                        border: OutlineInputBorder(),
-                        labelText: 'size of place: ',
-                        hintText: 'Square feet'),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter address ';
-                      } else {
-                        return null;
-                      }
-                    },
-                    // onSaved: (val) => setState(() => _post.sizeOfPlace = val),
-                  ),
+                Row(
+                  children: [
+                    Expanded(
+                      child:Container(
+                              margin:
+                                  const EdgeInsets.only(left: 20, top: 10, right: 10, bottom: 10),
+                              // color: Colors.blue[600],
+                              width: double.infinity,
+                              height: 60,
+                              child: TextFormField(
+                                controller: sizeController,
+                                decoration: InputDecoration(
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    border: OutlineInputBorder(),
+                                    labelText: 'size of place: ',
+                                    hintText: 'Square feet'),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter address ';
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                            // onSaved: (val) => setState(() => _post.sizeOfPlace = val),
+                              ),
+                            ),
+                        ),
+                        Expanded(
+                         child:Container(
+                          margin:
+                              const EdgeInsets.only(right: 20, top: 10, left: 10, bottom: 10),
+                          // color: Colors.blue[600],
+                          width: double.infinity,
+                          height: 60,
+                          child: TextFormField(
+                            controller: bedroomNoController,
+                            decoration: InputDecoration(
+                                fillColor: Colors.white,
+                                filled: true,
+                                border: OutlineInputBorder(),
+                                labelText: 'Bedrooms Number: ',
+                                hintText: '3'),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter numbers of bedroom';
+                              } else {
+                                return null;
+                              }
+                            },
+                            // onSaved: (val) => setState(() => _post.sizeOfPlace = val),
+                          ),
+                        ),
+                      ),
+                  ],
                 ),
+                
                 Container(
                   margin:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  color: Colors.blue[600],
+                  // color: Colors.blue[600],
                   width: double.infinity,
                   height: 60,
                   child: TextFormField(
@@ -194,7 +262,7 @@ void _showPicker(context) {
                 Container(
                   margin:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  color: Colors.blue[600],
+                  // color: Colors.blue[600],
                   width: double.infinity,
                   height: 60,
                   child: TextFormField(
@@ -218,7 +286,7 @@ void _showPicker(context) {
                 Container(
                   margin:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  color: Colors.blue[600],
+                  // color: Colors.blue[600],
                   width: double.infinity,
                   height: 60,
                   child: TextFormField(
@@ -239,6 +307,31 @@ void _showPicker(context) {
                     // onSaved: (val) => setState(() => _post.bookingMoney = val),
                   ),
                 ),
+
+                Text('Rental Type',style: TextStyle(fontSize: 17.0, color: Colors.grey[700]), textAlign: TextAlign.left, ),  
+                CheckboxListTile(  
+                  title: const Text('Family'),  
+                  controlAffinity: ListTileControlAffinity.trailing, 
+                  secondary: const Icon(Icons.family_restroom_rounded),  
+                  value: this.family,  
+                  onChanged: (bool value) {  
+                    setState(() {  
+                      this.family = value;  
+                    });  
+                  },  
+                ), 
+                CheckboxListTile(  
+                  title: const Text('Bachelor'),  
+                  controlAffinity: ListTileControlAffinity.trailing,  
+                  secondary: const Icon(Icons.accessibility_new),   
+                  value: this.bachelor,  
+                  onChanged: (bool value) {  
+                    setState(() {  
+                      this.bachelor = value;  
+                    });  
+                  },  
+                ), 
+
                 Container(
                   margin:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -254,8 +347,8 @@ void _showPicker(context) {
                     decoration: InputDecoration(
                       fillColor: Colors.white30,
                       filled: true,
-                      border: OutlineInputBorder(
-                          borderSide: new BorderSide(color: Colors.blue)),
+                      border: OutlineInputBorder(),
+                          // borderSide: new BorderSide(color: Colors.blue)),
                       labelText: 'Description: ',
                     ),
                     // onSaved: (val) => setState(() => _post.description = val),
@@ -291,7 +384,7 @@ void _showPicker(context) {
                                 Icons.camera_alt,
                                 color: Colors.grey[800],
                               ),
-                            ),
+                            ), 
                     ),
                   ),
                 ),
@@ -315,33 +408,40 @@ void _showPicker(context) {
   }
 
   storeData() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        _onSubmit();
-        return AlertDialog(
-          // Retrieve the text the user has entered by using the
-          // TextEditingController.
-          content: Text(addressController.text+ "\n" + sizeController.text + "\n" + rentDateController.text + "\n" + rentPriceController.text + "\n" + bookingMoneyController.text + "\n" + descriptionController.text),
-        );
-      },
-    );
+    if (_formKey.currentState.validate()) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          _onSubmit();
+          return AlertDialog(
+            // Retrieve the text the user has entered by using the
+            // TextEditingController.
+            content: Text(postedByController.text + "\n" + addressController.text+ "\n" +  sizeController.text + "\n" +  bedroomNoController.text + "\n" + rentDateController.text + "\n" + rentPriceController.text + "\n" + bookingMoneyController.text + "\n" + descriptionController.text),
+          );
+        },
+      );
+    }
     // print("store data fucntion ");
   }
   _onSubmit() async {
-    var form = _formKey.currentState;
+    // var form = _formKey.currentState;
       // form.save();
+     
+      _post.posted_by = postedByController.text;
       _post.address = addressController.text;
-      _post.sizeOfPlace = sizeController.text;
-      _post.rentCommencementDate = rentDateController.text;
-      _post.rentalPrice = rentPriceController.text;
-      _post.bookingMoney = bookingMoneyController.text;
+      _post.size_of_place = sizeController.text;
+      _post.bedroom_no = bedroomNoController.text;
+      _post.rent_commencement_date = rentDateController.text;
+      _post.rental_price = rentPriceController.text;
+      _post.booking_money = bookingMoneyController.text;
+      _post.rental_type_family = family;
+      _post.rental_type_bachelor = bachelor;
       _post.description = descriptionController.text;
 
       var response = await _dbHelper.insertPost(_post);
       print(response);
 
       // form.reset();
-      // Navigator.pushNamed(context, myPost);
+      Navigator.pushNamed(context, rentPostList);
   }
 }

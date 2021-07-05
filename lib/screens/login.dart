@@ -137,7 +137,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             );
                           },
                         );
-                        Navigator.pushNamed(context, homeRoute, arguments: {'emailId': emailController.text, 'password': passwordController.text});
+                        Navigator.pushNamed(context, rentPostList);
+                        // Navigator.pushNamed(context, homeRoute, arguments: {'emailId': emailController.text, 'password': passwordController.text});
                       }
 
                     },

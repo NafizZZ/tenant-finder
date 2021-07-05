@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tenant_finder/constants.dart';
-import 'package:tenant_finder/screens/navigation_drawer_widget.dart';
+import 'package:tenant_finder/screens/widgets/navigation_drawer_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   var email, password;
@@ -40,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: NavigationDrawerWidget(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushNamed(context, rentPost);          
+          Navigator.pushNamed(context, createRentPost);          
         },
         child: const Icon(Icons.add_business),
         backgroundColor: Colors.blue,

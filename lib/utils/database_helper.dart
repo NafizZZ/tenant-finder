@@ -3,7 +3,10 @@ import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'package:tenant_finder/constants.dart';
 import 'package:tenant_finder/models/post.dart';
+
+
 
 class DatabaseHelper {
   static const _databaseName = 'RentPost.db';
@@ -29,28 +32,32 @@ class DatabaseHelper {
     await createPostsTable(db);
   }
 
-
+// $colStatus TEXT NOT NULL, $colBedroomNo TEXT NOT NULL, $colRentalType TEXT NOT NULL,
   Future<void> createPostsTable (Database db) async{
     print('this is from createPostTable function!!!');
     final sql = '''
-    CREATE TABLE ${Post.tblPost}(
-      ${Post.colId} INTEGER PRIMARY KEY AUTOINCREMENT,
-      ${Post.colAddress} TEXT NOT NULL,
-      ${Post.colSizeOfPlace} TEXT NOT NULL,
-      ${Post.colRentCommencementDate} TEXT NOT NULL,
-      ${Post.colRentalPrice} TEXT NOT NULL,
-      ${Post.colBookingMoney} INTEGER NOT NULL,
-      ${Post.colDescription} TEXT NOT NULL
+    CREATE TABLE $tblPost(
+      $colId INTEGER PRIMARY KEY AUTOINCREMENT,
+      $colPostedBy TEXT NOT NULL, 
+      $colAddress TEXT NOT NULL,
+      $colSizeOfPlace TEXT NOT NULL,
+      $colBedroomNo TEXT NOT NULL, 
+      $colRentCommencementDate TEXT NOT NULL,
+      $colRentalPrice TEXT NOT NULL,
+      $colBookingMoney TEXT NOT NULL,
+      $colRentalTypeFamily BOOLEAN,
+      $colRentalTypeBachelor BOOLEAN,
+      $colDescription TEXT
     )''';
     await db.execute(sql);
-    print("${Post.tblPost} table created!!!!!");
+    print("$tblPost table created!!!!!");
   }
 
   Future<int> insertPost(Post post) async{
     Database db = await database;
     var response;
     try {
-      response = await db.insert(Post.tblPost, post.toMap());
+      response = await db.insert(tblPost, post.toMap());
       print("insert info:  $response ");
     }
     catch(error){
@@ -59,12 +66,22 @@ class DatabaseHelper {
     return response;
   }
 
-  Future<List<Post>> fetchPosts() async{
+  fetchPosts() async{
     Database db = await database;
-    List<Map> posts = await db.query(Post.tblPost);
-    return posts.length == 0
-    ? []
-    : posts.map((e) => Post.fromMap(e)).toList();
+    
+    try{
+        List<Map> posts = await db.query(tblPost);
+        print("this is posts  $posts");
+        print( posts.length);
+        return posts.length == 0
+        ? []
+        : posts;
+        // : posts.map((e) => Post.fromMap(e)).toList();
+    }
+    catch(error){
+        print(error);
+    }
+    
   }
 
 }
