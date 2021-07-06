@@ -87,12 +87,12 @@ class DatabaseHelper {
 
   getSinglePostDetails(int id) async {
     Database db = await database;
-    
+
      try{
         List<Map> post = await db.query(tblPost,
                                   where: 'id = ?',
                                   whereArgs: [id]);
-        print("this is posts  $post");
+        print("this is a single post details: $post");
         print( post.length);
         return post.length == 0
         ? []

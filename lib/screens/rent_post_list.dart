@@ -44,7 +44,7 @@ class _RentPostListState extends State<RentPostList> {
   // final List<String> entries = <String>['Gulshan', 'Banani', 'Dhanmondi'];
   // final List<int> colorCodes = <int>[600, 300, 100];
   // final List<int> price = <int>[600, 300, 100];
-  List a = [
+  List images = [
     "https://q4g9y5a8.rocketcdn.me/wp-content/uploads/2020/02/home-banner-2020-02-min.jpg",
     "https://pbs.twimg.com/media/Dk3BtZRW0AAov5V.jpg",
     "https://i.pinimg.com/originals/9e/97/80/9e978052c3da56cec171517e65028965.jpg",
@@ -83,7 +83,7 @@ class _RentPostListState extends State<RentPostList> {
                       // color: Colors.black,
                       child: Column(
                         children: <Widget>[
-                          Image.network(a[0],
+                          Image.network(images[0],
                               height: 250,
                               width: double.infinity,
                               fit: BoxFit.fill),
@@ -133,7 +133,7 @@ class _RentPostListState extends State<RentPostList> {
                                     Icon(Icons.arrow_drop_down_circle_outlined),
                                 onPressed: () {
                                   // Navigator.pushNamed(context, detailsRentPost);
-                                  Navigator.pushNamed(context, detailsRentPost, arguments: {'id': _posts[index][colBookingMoney]});
+                                  Navigator.pushNamed(context, detailsRentPost, arguments: {'id': _posts[index][colId]});
                                 },
                               ),
                               // const SizedBox(width: 8),
