@@ -85,4 +85,23 @@ class DatabaseHelper {
     
   }
 
+  getSinglePostDetails(int id) async {
+    Database db = await database;
+    
+     try{
+        List<Map> post = await db.query(tblPost,
+                                  where: 'id = ?',
+                                  whereArgs: [id]);
+        print("this is posts  $post");
+        print( post.length);
+        return post.length == 0
+        ? []
+        : post;
+        // : posts.map((e) => Post.fromMap(e)).toList();
+    }
+    catch(error){
+        print(error);
+    }
+  }
+
 }

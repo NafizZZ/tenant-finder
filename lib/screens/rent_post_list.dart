@@ -132,7 +132,8 @@ class _RentPostListState extends State<RentPostList> {
                                 icon:
                                     Icon(Icons.arrow_drop_down_circle_outlined),
                                 onPressed: () {
-                                  Navigator.pushNamed(context, detailsRentPost);
+                                  // Navigator.pushNamed(context, detailsRentPost);
+                                  Navigator.pushNamed(context, detailsRentPost, arguments: {'id': _posts[index][colBookingMoney]});
                                 },
                               ),
                               // const SizedBox(width: 8),

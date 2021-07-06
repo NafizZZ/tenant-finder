@@ -20,7 +20,8 @@ class RouteGenerator {
       case '/rentPostList':
         return CupertinoPageRoute(builder: (_) => RentPostList());
       case '/detailsRentPost':
-        return CupertinoPageRoute(builder: (_) => DetailsRentPost());
+        var data = settings.arguments as Map;
+        return CupertinoPageRoute(builder: (_) => DetailsRentPost(iD: data['id']));
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(
